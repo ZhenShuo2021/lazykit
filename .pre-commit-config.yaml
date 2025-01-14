@@ -1,0 +1,46 @@
+repos:
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v5.0.0
+    hooks:
+      - id: end-of-file-fixer
+      - id: check-yaml
+      - id: check-added-large-files
+      - id: detect-private-key
+      - id: debug-statements
+      - id: check-case-conflict
+
+  - repo: https://github.com/PyCQA/bandit
+    rev: 1.8.2
+    hooks:
+      - id: bandit
+        args: ["-ll"]
+
+  - repo: https://github.com/asottile/pyupgrade
+    rev: v3.19.1
+    hooks:
+      - id: pyupgrade
+
+  - repo: https://github.com/astral-sh/ruff-pre-commit
+    rev: v0.9.1
+    hooks:
+      - id: ruff
+        args: [--config=pyproject.toml, --fix, --exit-non-zero-on-fix]
+      - id: ruff-format
+        name: ruff-format
+        args: [--config=pyproject.toml]
+
+  - repo: local
+    hooks:
+    - id: pip-compile-production
+      name: Pip compile production
+      entry: bash -c 'uv pip compile -q pyproject.toml -o requirements.txt --annotation-style line'
+      language: system
+      files: ^uv.lock$
+
+  - repo: local
+    hooks:
+    - id: pip-compile-docs
+      name: Pip compile production
+      entry: bash -c 'uv sync --group docs && uv pip freeze --exclude-editable > docs/requirements.txt'
+      language: system
+      files: ^uv.lock$

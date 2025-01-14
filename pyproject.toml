@@ -1,0 +1,146 @@
+[project]
+name = "lazykit"
+version = "0.1.0"
+description = "Lazy kit for lazy python developers"
+readme = "README.md"
+authors = [
+    { name = "ZhenShuo2021", email = "98386542+ZhenShuo2021@users.noreply.github.com" },
+]
+requires-python = ">=3.9"
+dependencies = [
+    "pathvalidate>=3.2.3",
+    "setuptools>=75.8.0",
+]
+
+[project.optional-dependencies]
+all = [
+    "requests>=2.32.3",
+    "python-fsutil>=0.14.1",
+]
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/lazykit"]
+
+[dependency-groups]
+dev = [
+    "ipykernel>=6.29.5",
+    "ruff>=0.9.0",
+]
+docs = [
+    "mkdocs-material>=9.5.49",
+    "mkdocs>=1.6.1",
+    "mkdocstrings[python]>=0.27.0",
+    "mkdocs-static-i18n>=1.2.3",
+]
+
+
+[tool.mypy]
+# ignore_missing_imports = true
+check_untyped_defs = true
+disallow_untyped_defs = true
+disallow_incomplete_defs = true
+warn_redundant_casts = true
+warn_unreachable = true
+warn_unused_ignores = true
+follow_imports = "silent"
+disable_error_code = [
+    "import-untyped",
+    "import-not-found",
+    "no-untyped-call",
+    "no-any-return",
+    "unused-ignore",
+]
+enable_error_code = ["attr-defined", "name-defined"]
+
+
+[tool.ruff]
+line-length = 100
+exclude = [".git", "build", ".tox", ".eggs", "safe_house"]
+preview = true
+
+[tool.ruff.format]
+docstring-code-format = true
+quote-style = "single"
+
+[tool.ruff.lint]
+explicit-preview-rules = true
+allowed-confusables = ["，", "。", "（", "）"]
+ignore = [
+    "T201",    # print
+    "Q000",    # flake8-quotes "Double quote"
+    "COM812",  # flake8-commas "Trailing comma missing"
+    "ISC001",  # flake8-single-line-implicit-string-concatenation
+    "E402",    # module-import-not-at-top-of-file
+    "E501",    # line-too-long
+    "E731",    # lambda-assignment
+    "E741",    # ambiguous-variable-name
+    "UP036",   # outdated-version-block
+    "B006",    # mutable-argument-default
+    "B008",    # function-call-in-default-argument
+    "B011",    # assert-false
+    "B017",    # assert-raises-exception
+    "B023",    # function-uses-loop-variable (false positives)
+    "B028",    # no-explicit-stacklevel
+    "B904",    # raise-without-from-inside-except
+    "C401",    # unnecessary-generator-set
+    "C402",    # unnecessary-generator-dict
+    "PIE790",  # unnecessary-placeholder
+    "SIM102",  # collapsible-if
+    "SIM108",  # if-else-block-instead-of-if-exp
+    "SIM112",  # uncapitalized-environment-variables
+    "SIM113",  # enumerate-for-loop
+    "SIM114",  # if-with-same-arms
+    "SIM115",  # open-file-with-context-handler
+    "SIM117",  # multiple-with-statements
+    "SIM223",  # expr-and-false
+    "SIM300",  # yoda-conditions
+    "TD001",   # invalid-todo-tag
+    "TD002",   # missing-todo-author
+    "TD003",   # missing-todo-link
+    "PLE0604", # invalid-all-object (false positives)
+    "PLE0643", # potential-index-error (false positives)
+    "PLW0603", # global-statement
+    "PLW1510", # subprocess-run-without-check
+    "PLW2901", # redefined-loop-name
+    "RUF001",  # ambiguous-unicode-character-string
+    "RUF012",  # mutable-class-default
+    "RUF100",  # unused-noqa (flake8 has slightly different behavior)
+]
+select = [
+    "E",      # pycodestyle Error
+    "W",      # pycodestyle Warning
+    "F",      # Pyflakes
+    "I",      # isort
+    "Q",      # flake8-quotes
+    "N803",   # invalid-argument-name
+    "N804",   # invalid-first-argument-name-for-class-method
+    "UP",     # pyupgrade
+    "B",      # flake8-bugbear
+    "A",      # flake8-builtins
+    "COM",    # flake8-commas
+    "C4",     # flake8-comprehensions
+    "FA",     # flake8-future-annotations
+    "ISC",    # flake8-implicit-str-concat
+    "ICN003", # banned-import-from
+    "PIE",    # flake8-pie
+    "T20",    # flake8-print
+    "RSE",    # flake8-raise
+    "RET504", # unnecessary-assign
+    "SIM",    # flake8-simplify
+    "TID251", # banned-api
+    "TD",     # flake8-todos
+    "PLC",    # Pylint Convention
+    "PLE",    # Pylint Error
+    "PLW",    # Pylint Warning
+    "RUF",    # Ruff-specific rules
+]
+
+[tool.ruff.lint.isort]
+force-single-line = false
+combine-as-imports = true
+length-sort-straight = false
+relative-imports-order = "closest-to-furthest"

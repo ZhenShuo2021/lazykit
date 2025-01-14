@@ -1,0 +1,120 @@
+site_name: lazykit
+site_description: Lazy Kit for Lazy Python Developers
+site_author: ZhenShuo Lien
+site_url: http://localhost:8000
+copyright: Copyright @ 2025 ZhenShuo Lien, All rights reserved.
+repo_url: https://github.com/ZhenShuo2021/lazykit
+nav:
+  - 簡介: index.md
+  - 用法:
+    - CLI Kit: kits/cli_kit.md
+    - Log Kit: kits/log_kit.md
+    - Decode Kit: kits/decode_kit.md
+    - Path Kit: kits/path_kit.md
+    - Time Kit: kits/time_kit.md
+    - String Kit: kits/string_kit.md
+    - Tool Kit: kits/tool_kit.md
+theme:
+  name: material
+  features:
+    - navigation.tabs.sticky
+    - search.suggest
+    - search.highlight
+    - search.share
+    - navigation.top  # 返回顶部按钮
+    - navigation.tracking
+    - toc.follow
+    - content.code.copy  # 代码复制按钮
+    # - navigation.tabs  # 使用标签页
+    - navigation.tabs.sticky  # 标签页不消失
+    - navigation.footer  # 上一页和下一页
+  palette:
+    - media: "(prefers-color-scheme)"
+      toggle:
+        icon: material/brightness-auto
+        name: Switch to light mode
+
+    # Palette toggle for light mode
+    - media: "(prefers-color-scheme: light)"
+      scheme: default 
+      primary: indigo
+      toggle:
+        icon: material/brightness-7
+        name: Switch to dark mode
+
+    # Palette toggle for dark mode
+    - media: "(prefers-color-scheme: dark)"
+      scheme: slate
+      primary: indigo
+      toggle:
+        icon: material/brightness-4
+        name: Switch to system preference
+
+plugins:
+  - search
+  # - i18n:
+  # # 在檔名後加上 locale 設定
+  #     docs_structure: suffix
+  #     languages:
+  #       - locale: zh-TW
+  #         name: 中文
+  #         default: true
+  #         build: true
+  #       - locale: en
+  #         name: English
+  #         build: true
+  - mkdocstrings:
+      default_handler: python
+      handlers:
+        python:
+          templates_dir: docs/templates
+          paths: ['../src']
+          options:
+            show_source: false
+            show_bases: false
+            show_root_heading: true
+            show_root_full_path: false
+            show_root_members_full_path: false
+            show_symbol_type_heading: true
+            show_symbol_type_toc: true
+            show_docstring_attributes: false
+            summary: true
+            show_labels: false
+            docstring_section_style: spacy
+            heading_level: 2  # 开始的标题级别
+            docstring_style: google  # docstring 风格，可以是 google, numpy, 或 sphinx
+            show_signature_annotations: true  # 显示类型注解
+            separate_signature: true  # 分开显示签名
+            show_signature: true
+            signature_crossrefs: false
+            line_length: 100
+            show_if_no_docstring: false
+            docstring_options:
+              ignore_init_summary: true
+            merge_init_into_class: true
+            members_order: source
+markdown_extensions:
+  - admonition
+  - pymdownx.inlinehilite
+  - pymdownx.blocks.admonition
+  - pymdownx.blocks.html
+  - pymdownx.blocks.tab
+  - pymdownx.details
+  - pymdownx.magiclink
+  - pymdownx.snippets
+  - pymdownx.superfences
+  - pymdownx.tabbed
+  - pymdownx.tasklist
+  - pymdownx.highlight:
+      anchor_linenums: true
+  - toc:
+      permalink: "¤"
+
+# extra:
+#   alternate:
+#     - name: 繁體中文
+#       link: /
+#       lang: zh-TW
+#     - name: English
+#       link: /en/
+#       lang: en
